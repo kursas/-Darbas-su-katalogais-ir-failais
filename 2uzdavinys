@@ -1,0 +1,43 @@
+# Sukurti programą, kuri:
+# • Leistų vartotojui įvesti norimą eilučių kiekį
+# • Įrašytų įvestą tekstą atskiromis eilutėmis į failą
+# • Leistų vartotojui įrašyti norimą kuriamo failo pavadinimą
+# Patarimai:
+# • Sukurti while ciklą, kuris užsibaigtų tik įvedus vartotojui tuščią eilutę (nuspaudus ENTER)
+
+import os
+
+eilutes = int(input("Iveskite eiluciu kieki.\nEilutes =  "))
+tekstas = input("Iveskite bet koki teksta: \n")
+pavadinimas = input("Iveskite failo pavadinima (bus sukurtas txt failas):\n")
+counter = 0
+while counter < eilutes:
+    counter += 1
+    if os.path.isfile(pavadinimas + ".txt") == False:
+       with open(pavadinimas+".txt", "w") as failas:
+          failas.write(f"{tekstas}\n")
+          print(f"Failas: '{pavadinimas}' sukurtas.\nTekstas: '{tekstas}' irasytas.")
+    else:
+       with open(pavadinimas + ".txt", "a+") as failas:
+          failas.write(f"{tekstas}\n")
+          print(f"Tekstas irasytas")
+          
+ #output
+ Eilutes =  10
+Iveskite bet koki teksta: 
+labas rytas
+Iveskite failo pavadinima (bus sukurtas txt failas):
+mano
+Failas: 'mano' sukurtas.
+Tekstas: 'labas rytas' irasytas.
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+Tekstas irasytas
+
+Process finished with exit code 0
