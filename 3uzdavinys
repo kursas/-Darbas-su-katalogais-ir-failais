@@ -1,0 +1,56 @@
+# Sukurti programą, kuri:
+# • Kompiuterio darbalaukyje (Desktop) sukurtų katalogą „Naujas Katalogas“
+# • Šiame kataloge sukurtų tekstinį failą, kuriame būtų šiandienos data ir laikas
+# • Atspausdintų šio tekstinio failo sukūrimo datą ir dydį baitais
+# Patarimai:
+# • Failo sukūrimo datą galima pasiekti per os.stat(„Failas.txt“).st_ctime
+
+import os
+import datetime
+desktop = "D:\\DUMENYS\\DARIUS\\Desktop\\"
+os.chdir(desktop)
+print(os.listdir())
+katalogo_pav = "Naujas_katalogas_uzd_3"
+katalogo_path = desktop + "\\" + katalogo_pav
+print(katalogo_path)
+tikrinam_path = os.path.exists(katalogo_path)
+print(tikrinam_path)
+teks_failas = "failas.txt"
+siandien = datetime.datetime.now()
+
+if tikrinam_path == False:
+   os.mkdir(katalogo_pav)
+   print(f"Katalogas: '{katalogo_pav}' sukurtas")
+   os.chdir(katalogo_path)
+   with open(teks_failas, "w") as failas:
+      failas.write(f"Data: {str(siandien.date())}, laikas: {str(siandien.time())}\n")
+      print(f"Failas: {teks_failas}, kataloge: {katalogo_pav} sukurtas")
+else:
+   os.chdir(katalogo_path)
+   with open(teks_failas, "w") as failas:
+      failas.write(f"Data: {str(siandien.date())}, laikas: {str(siandien.time())}\n")
+      print(f"Failas: {teks_failas}, kataloge: {katalogo_pav} sukurtas")
+
+
+failo_path = katalogo_path + "\\" + teks_failas
+
+if os.path.isfile(failo_path) == True:
+   os.chdir(katalogo_path)
+   stampa_i_data = datetime.datetime.fromtimestamp(os.stat(teks_failas).st_ctime)
+   print("Failas egzistuoja")
+   print(f"Failas sukurtas: {stampa_i_data}")
+   print(f"Failo dydis: {os.stat(teks_failas).st_size} bytes")
+else:
+   print("Tokio failo nera")
+   
+   
+   #output
+   D:\DUMENYS\DARIUS\Desktop\\Naujas_katalogas_uzd_3
+False
+Katalogas: 'Naujas_katalogas_uzd_3' sukurtas
+Failas: failas.txt, kataloge: Naujas_katalogas_uzd_3 sukurtas
+Failas egzistuoja
+Failas sukurtas: 2023-01-01 16:21:10.505811
+Failo dydis: 43 bytes
+
+Process finished with exit code 0
